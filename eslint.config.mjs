@@ -13,9 +13,9 @@ export default [
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
   {
-    // rules: {
-    //   "no-console": ['error', { allow: ['warn', 'error', 'info'] }],
-    // }
+    rules: {
+      "no-console": ['error', { allow: ['warn', 'error', 'info'] }],
+    }
   }, {
     ignores: ['node_modules', 'dist']
   }
