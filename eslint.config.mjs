@@ -6,17 +6,23 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 export default [
   {
     languageOptions: {
-      globals: globals.browser
-    }
+      globals: globals.browser,
+    },
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
   {
     rules: {
-      "no-console": ['error', { allow: ['warn', 'error', 'info'] }],
-    }
-  }, {
-    ignores: ['node_modules', 'dist']
-  }
+      'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    ignores: ['node_modules', 'dist'],
+  },
 ];
