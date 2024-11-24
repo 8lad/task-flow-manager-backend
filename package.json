@@ -1,29 +1,32 @@
 {
-	"name": "task-flow-manager-backend",
-	"version": "1.0.0",
-	"description": "Backend part for the express js application",
-	"main": "dist/index.js",
-	"scripts": {
-		"build": "tsc",
-		"dev": "nodemon",
-		"start": "node dist/index.js"
-	},
-	"keywords": [],
-	"author": "Vlad",
-	"license": "ISC",
-	"devDependencies": {
-		"@eslint/js": "^9.15.0",
-		"@types/express": "^5.0.0",
-		"eslint": "^9.15.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-prettier": "^5.2.1",
-		"nodemon": "^3.1.7",
-		"prettier": "^3.3.3",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.7.2",
-		"typescript-eslint": "^8.15.0"
-	},
-	"dependencies": {
-		"express": "^4.21.1"
-	}
+  "name": "task-flow-manager-backend",
+  "version": "1.0.0",
+  "description": "Backend part for the express js application",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon",
+    "start": "node dist/index.js",
+    "lint": "eslint .",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "Vlad",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/express": "^5.0.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "5.6.3",
+    "typescript-eslint": "^8.15.0"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
+
