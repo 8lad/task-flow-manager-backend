@@ -1,12 +1,13 @@
 import prisma from './config/prismaClient';
 import express from 'express';
+import { checkAllEnvVariables } from './utils/checkAllEnvVariables';
 
 const app = express();
 
+checkAllEnvVariables();
+
 const main = async () => {
   app.listen(process.env.SERVER_PORT || 3200, () => {
-    console.info(` ${process.env.NODE_ENV} mode`);
-
     console.info(`The server is running on the ${process.env.SERVER_PORT} port`);
   });
 };
