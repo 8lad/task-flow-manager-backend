@@ -19,6 +19,7 @@ model User {
   name String
   authProviderId String?
   password String
+  isActive Boolean @default(true)
   role Role
   projects Project[]
   tasks Task[]

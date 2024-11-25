@@ -3,6 +3,7 @@ export enum RequestMenthods {
   Post = 'POST',
   Put = 'PUT',
   Delete = 'DELETE',
+  Patch = 'PATCH',
 }
 
 export enum ResponseStatus {

@@ -36,6 +36,7 @@ const main = async () => {
         RequestMenthods.Post,
         RequestMenthods.Get,
         RequestMenthods.Put,
+        RequestMenthods.Patch,
       ],
     }),
   );
