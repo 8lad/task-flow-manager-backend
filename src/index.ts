@@ -2,6 +2,7 @@ import prisma from './config/prismaClient';
 import express from 'express';
 import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
+import cookieParser from 'cookie-parser';
 import { checkAllEnvVariables } from './utils/checkAllEnvVariables';
 import { isDevelopmentMode } from './utils/isDevelopmentMode';
 import {
@@ -44,6 +45,8 @@ const main = async () => {
       statusCode: 400,
     }),
   );
+
+  app.use(cookieParser());
 
   app.listen(process.env.SERVER_PORT || SPARE_DEV_PORT, () => {
     console.info(`The server is running on the ${process.env.SERVER_PORT || SPARE_DEV_PORT} port`);
