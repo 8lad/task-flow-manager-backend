@@ -14,6 +14,7 @@ import {
 import { RequestMenthods } from './utils/types';
 import { getErrorResponseInfoObject } from './utils/helpers';
 import { errorLogger } from './services/errorLogger';
+import { notFoundErrorHandler } from './services/notFoundErrorHandler';
 
 const IS_DEVELOPMENT_MODE = isDevelopmentMode();
 
@@ -53,8 +54,12 @@ const main = async () => {
     app.use(errorLogger);
   }
 
+  app.all(ALL_ROUTES, notFoundErrorHandler);
+
   app.listen(process.env.SERVER_PORT || SPARE_DEV_PORT, () => {
-    console.info(`The server is running on the ${process.env.SERVER_PORT || SPARE_DEV_PORT} port`);
+    console.info(
+      `*** The server is running on the ${process.env.SERVER_PORT || SPARE_DEV_PORT} port ***`,
+    );
   });
 };
 
