@@ -1,8 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from './config/prismaClient';
+import express from 'express';
 
-const prisma = new PrismaClient();
+const app = express();
 
-const main = async () => {};
+const main = async () => {
+  app.listen(process.env.SERVER_PORT || 3200, () => {
+    console.info(`The server is running on the ${process.env.SERVER_PORT} port`);
+  });
+};
 
 main()
   .then(async () => {
