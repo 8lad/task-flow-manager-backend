@@ -6,19 +6,22 @@ import cookieParser from 'cookie-parser';
 import { checkAllEnvVariables } from './utils/checkAllEnvVariables';
 import { isDevelopmentMode } from './utils/isDevelopmentMode';
 import {
-  DEV_ORIGIN_URL,
+  ALL_ROUTES,
   REQUEST_AMOUNT_LIMIT,
   REQUEST_TIME_LIMIT,
   SPARE_DEV_PORT,
 } from './utils/constants';
 import { RequestMenthods } from './utils/types';
 import { getErrorResponseInfoObject } from './utils/helpers';
+import { errorLogger } from './services/errorLogger';
+import { notFoundErrorHandler } from './services/notFoundErrorHandler';
+import { finalErrorHandler } from './services/finalErrorHandler';
 
 const IS_DEVELOPMENT_MODE = isDevelopmentMode();
 
 const app = express();
 
-const originUrl = IS_DEVELOPMENT_MODE ? DEV_ORIGIN_URL : process.env.ORIGIN_URL;
+const originUrl = IS_DEVELOPMENT_MODE ? ALL_ROUTES : process.env.ORIGIN_URL;
 
 checkAllEnvVariables();
 
@@ -48,8 +51,17 @@ const main = async () => {
 
   app.use(cookieParser());
 
+  if (IS_DEVELOPMENT_MODE) {
+    app.use(errorLogger);
+  }
+
+  app.all(ALL_ROUTES, notFoundErrorHandler);
+  app.use(finalErrorHandler);
+
   app.listen(process.env.SERVER_PORT || SPARE_DEV_PORT, () => {
-    console.info(`The server is running on the ${process.env.SERVER_PORT || SPARE_DEV_PORT} port`);
+    console.info(
+      `*** The server is running on the ${process.env.SERVER_PORT || SPARE_DEV_PORT} port ***`,
+    );
   });
 };
 

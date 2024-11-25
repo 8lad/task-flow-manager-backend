@@ -5,5 +5,5 @@ export const checkAllEnvVariables = () => {
     console.error(`### These env variables are missed: ${missedVariablesArray.join(', ')} ###`);
     process.exit(1);
   }
-  console.info('All env variables are fine');
+  console.info('*** All env variables are fine ***');
 };
