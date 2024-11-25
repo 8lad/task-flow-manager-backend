@@ -15,6 +15,7 @@ import { RequestMenthods } from './utils/types';
 import { getErrorResponseInfoObject } from './utils/helpers';
 import { errorLogger } from './services/errorLogger';
 import { notFoundErrorHandler } from './services/notFoundErrorHandler';
+import { finalErrorHandler } from './services/finalErrorHandler';
 
 const IS_DEVELOPMENT_MODE = isDevelopmentMode();
 
@@ -55,6 +56,7 @@ const main = async () => {
   }
 
   app.all(ALL_ROUTES, notFoundErrorHandler);
+  app.use(finalErrorHandler);
 
   app.listen(process.env.SERVER_PORT || SPARE_DEV_PORT, () => {
     console.info(
