@@ -7,6 +7,18 @@ const createUser = async (data: CreateUserData) => {
   });
 };
 
+const deleteUser = async (useId: number) => {
+  return await prisma.user.update({
+    where: {
+      id: useId,
+    },
+    data: {
+      isActive: false,
+    },
+  });
+};
+
 export default {
   createUser,
+  deleteUser,
 };
