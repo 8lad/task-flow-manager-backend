@@ -15,3 +15,9 @@ export interface ResponseInfoObject {
   message: string;
   status: ResponseStatus;
 }
+
+export interface CreateUserData {
+  name: string;
+  email: string;
+  auth0Id: string;
+}
