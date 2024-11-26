@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 export enum RequestMenthods {
   Get = 'GET',
   Post = 'POST',
@@ -21,3 +23,7 @@ export interface CreateUserData {
   email: string;
   auth0Id: string;
 }
+
+export type SingleUserSearchParams = {
+  [key in keyof Prisma.UserSelect]?: boolean;
+};
