@@ -17,9 +17,9 @@ model User {
   id Int @id @default(autoincrement())
   email String @unique
   name String
-  authProviderId String?
-  password String
-  role Role
+  auth0Id String
+  isActive Boolean @default(true)
+  role Role @default(MEMBER)
   projects Project[]
   tasks Task[]
   profile Profile?
