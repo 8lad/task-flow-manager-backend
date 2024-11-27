@@ -63,7 +63,34 @@ const updateUser = async (
   }
 };
 
+const deleteUser = async (
+  req: Request<unknown, unknown, { searchParameter: string | number }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { searchParameter } = req.body;
+
+    const existingUser = await userRepository.getSingleUser(searchParameter);
+
+    if (!existingUser) {
+      throw new CustomError("User doesn't exist", 404);
+    }
+
+    const deletedUser = await userRepository.deleteUser(searchParameter);
+
+    if (!deletedUser) {
+      throw new CustomError("Can't delete the current user", 403);
+    }
+
+    res.status(200).json(getSuccessResponseInfoObject('The user was deleted'));
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   createUser,
   updateUser,
+  deleteUser,
 };
