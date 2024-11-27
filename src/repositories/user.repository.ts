@@ -1,7 +1,8 @@
 import prisma from '../config/prismaClient';
-import { CreateUserData, SingleUserSearchParams } from '../utils/types';
+import { Prisma } from '@prisma/client';
+import { SingleUserSearchParams } from '../utils/types';
 
-const createUser = async (data: CreateUserData) => {
+const createUser = async (data: Prisma.UserCreateInput) => {
   return await prisma.user.create({
     data,
   });
@@ -40,8 +41,20 @@ const deleteUser = async (useId: number) => {
   });
 };
 
+const updateSingleUser = async (id: number, data: Prisma.UserUpdateInput) => {
+  return await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      ...data,
+    },
+  });
+};
+
 export default {
   createUser,
   deleteUser,
   getSingleUser,
+  updateSingleUser,
 };

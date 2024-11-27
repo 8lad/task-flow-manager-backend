@@ -19,7 +19,7 @@ model User {
   name String
   auth0Id String
   isActive Boolean @default(true)
-  role Role?
+  role Role @default(MEMBER)
   projects Project[]
   tasks Task[]
   profile Profile?

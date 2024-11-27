@@ -18,12 +18,6 @@ export interface ResponseInfoObject {
   status: ResponseStatus;
 }
 
-export interface CreateUserData {
-  name: string;
-  email: string;
-  auth0Id: string;
-}
-
 export type SingleUserSearchParams = {
   [key in keyof Prisma.UserSelect]?: boolean;
 };
