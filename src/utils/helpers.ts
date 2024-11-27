@@ -9,3 +9,6 @@ export const getErrorResponseInfoObject = (message: string): ResponseInfoObject 
   message,
   status: ResponseStatus.Error,
 });
+
+export const getPrismaUserSearchParameter = (searchParameter: string | number) =>
+  typeof searchParameter !== 'string' ? { id: searchParameter } : { email: searchParameter };

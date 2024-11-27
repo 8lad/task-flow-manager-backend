@@ -1,6 +1,7 @@
 import prisma from '../config/prismaClient';
 import { Prisma } from '@prisma/client';
 import { SingleUserSearchParams } from '../utils/types';
+import { getPrismaUserSearchParameter } from '../utils/helpers';
 
 const createUser = async (data: Prisma.UserCreateInput) => {
   return await prisma.user.create({
@@ -14,9 +15,7 @@ const getSingleUser = async (
 ) => {
   const query = {
     where: {
-      ...(typeof searchParameter !== 'string'
-        ? { id: searchParameter }
-        : { email: searchParameter }),
+      ...getPrismaUserSearchParameter(searchParameter),
     },
     ...(additionalParams
       ? {
@@ -30,10 +29,10 @@ const getSingleUser = async (
   return await prisma.user.findUnique(query);
 };
 
-const deleteUser = async (useId: number) => {
+const deleteUser = async (searchParameter: number | string) => {
   return await prisma.user.update({
     where: {
-      id: useId,
+      ...getPrismaUserSearchParameter(searchParameter),
     },
     data: {
       isActive: false,
@@ -41,10 +40,10 @@ const deleteUser = async (useId: number) => {
   });
 };
 
-const updateSingleUser = async (id: number, data: Prisma.UserUpdateInput) => {
+const updateSingleUser = async (searchParameter: string | number, data: Prisma.UserUpdateInput) => {
   return await prisma.user.update({
     where: {
-      id,
+      ...getPrismaUserSearchParameter(searchParameter),
     },
     data: {
       ...data,
