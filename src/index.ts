@@ -16,6 +16,7 @@ import { getErrorResponseInfoObject } from './utils/helpers';
 import { errorLogger } from './services/errorLogger';
 import { notFoundErrorHandler } from './services/notFoundErrorHandler';
 import { finalErrorHandler } from './services/finalErrorHandler';
+import UserRouter from './routes/user.route';
 
 const IS_DEVELOPMENT_MODE = isDevelopmentMode();
 
@@ -55,6 +56,8 @@ const main = async () => {
   if (IS_DEVELOPMENT_MODE) {
     app.use(errorLogger);
   }
+
+  app.use(process.env.BASE_ROUTE!, UserRouter);
 
   app.all(ALL_ROUTES, notFoundErrorHandler);
   app.use(finalErrorHandler);
