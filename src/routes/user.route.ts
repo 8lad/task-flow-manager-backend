@@ -6,4 +6,6 @@ const router = Router();
 
 router.post(ApplicationRoutes.Register, userController.createUser);
 
+router.get(ApplicationRoutes.Register, userController.getUser);
+
 export default router;

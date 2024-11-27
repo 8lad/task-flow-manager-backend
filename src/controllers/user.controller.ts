@@ -4,6 +4,36 @@ import CustomError from '../services/errorInstance';
 import { getSuccessResponseInfoObject } from '../utils/helpers';
 import { Prisma } from '@prisma/client';
 
+const getUser = async (
+  req: Request<unknown, unknown, { searchParameter: string | number }>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { searchParameter } = req.body;
+
+    const singleUser = await userRepository.getSingleUser(searchParameter, {
+      email: true,
+      name: true,
+      auth0Id: true,
+      id: true,
+      projects: true,
+      role: true,
+      tasks: true,
+      isActive: true,
+      profile: true,
+    });
+
+    if (!singleUser) {
+      throw new CustomError("Can't find a user");
+    }
+
+    res.status(200).json(singleUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const createUser = async (
   req: Request<unknown, unknown, Prisma.UserCreateInput>,
   res: Response,
@@ -93,4 +123,5 @@ export default {
   createUser,
   updateUser,
   deleteUser,
+  getUser,
 };
