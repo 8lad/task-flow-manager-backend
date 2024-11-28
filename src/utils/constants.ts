@@ -1,4 +1,12 @@
-export const ALL_ENV_VARIABLES = ['SERVER_PORT', 'BASE_ROUTE', 'ORIGIN_URL'];
+export const ALL_ENV_VARIABLES = [
+  'SERVER_PORT',
+  'BASE_ROUTE',
+  'ORIGIN_URL',
+  'AUTH0_CLIENT_ID',
+  'AUTH0_CLIENT_SECRET',
+  'AUTH0_CALLBACK_URL',
+  'SESSION_SECRET',
+];
 export const ALL_ROUTES = '*';
 export const SPARE_DEV_PORT = 3200;
 

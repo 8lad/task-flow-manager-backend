@@ -17,6 +17,7 @@ import { errorLogger } from './services/errorLogger';
 import { notFoundErrorHandler } from './services/notFoundErrorHandler';
 import { finalErrorHandler } from './services/finalErrorHandler';
 import UserRouter from './routes/user.route';
+import { checkJwt } from './services/checkJwt';
 
 const IS_DEVELOPMENT_MODE = isDevelopmentMode();
 
@@ -56,6 +57,8 @@ const main = async () => {
   if (IS_DEVELOPMENT_MODE) {
     app.use(errorLogger);
   }
+
+  app.use(checkJwt.unless({}));
 
   app.use(process.env.BASE_ROUTE!, UserRouter);
 
