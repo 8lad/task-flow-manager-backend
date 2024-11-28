@@ -58,7 +58,7 @@ const main = async () => {
     app.use(errorLogger);
   }
 
-  app.use(checkJwt.unless({}));
+  app.use(checkJwt);
 
   app.use(process.env.BASE_ROUTE!, UserRouter);
 
