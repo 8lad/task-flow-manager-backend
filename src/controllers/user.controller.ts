@@ -5,14 +5,14 @@ import { getSuccessResponseInfoObject } from '../utils/helpers';
 import { Prisma } from '@prisma/client';
 
 const getUser = async (
-  req: Request<unknown, unknown, { searchParameter: string | number }>,
+  req: Request<{ id: string }, unknown, unknown>,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { searchParameter } = req.body;
+    const { id } = req.params;
 
-    const singleUser = await userRepository.getSingleUser(searchParameter, {
+    const singleUser = await userRepository.getSingleUser(id, {
       email: true,
       name: true,
       auth0Id: true,

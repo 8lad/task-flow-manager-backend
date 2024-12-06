@@ -17,6 +17,7 @@ model User {
   id Int @id @default(autoincrement())
   email String @unique
   name String
+  avatar String
   auth0Id String
   isActive Boolean @default(true)
   role Role @default(MEMBER)
@@ -30,7 +31,6 @@ model User {
 model Profile {
   id Int @id @default(autoincrement())
   bio String
-  avatar String
   occupation String
   userId Int @unique
   user User @relation(fields: [userId], references: [id])
