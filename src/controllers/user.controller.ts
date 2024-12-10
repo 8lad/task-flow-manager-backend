@@ -4,11 +4,7 @@ import CustomError from '../services/errorInstance';
 import { getSuccessResponseInfoObject } from '../utils/helpers';
 import { Prisma } from '@prisma/client';
 
-const getUser = async (
-  req: Request<{ id: string }, unknown, unknown>,
-  res: Response,
-  next: NextFunction,
-) => {
+const getUser = async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
 
@@ -44,11 +40,13 @@ const createUser = async (
     const existingUser = await userRepository.getSingleUser(email);
 
     if (existingUser && !existingUser.isActive) {
-      throw new CustomError('This account was deleted', 400);
+      res.status(200).json(getSuccessResponseInfoObject('This account was deleted'));
+      return;
     }
 
     if (existingUser) {
-      throw new CustomError('The account is already created', 400);
+      res.status(200).json(getSuccessResponseInfoObject('User already exists'));
+      return;
     }
 
     const newUser = await userRepository.createUser({ email, name });

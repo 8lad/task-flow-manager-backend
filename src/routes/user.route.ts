@@ -4,7 +4,7 @@ import userController from '../controllers/user.controller';
 
 const router = Router();
 
-router.post(ApplicationRoutes.SingleUser, userController.createUser);
+router.post(ApplicationRoutes.Users, userController.createUser);
 
 router.get(ApplicationRoutes.SingleUser, userController.getUser);
 
